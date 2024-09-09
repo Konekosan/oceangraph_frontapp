@@ -15,10 +15,11 @@ import { MaterialModule } from 'src/_module/Material.Module';
   templateUrl: './board.component.html',
   styleUrl: './board.component.css'
 })
+
 export class BoardComponent implements OnInit, OnDestroy{
 
   postData: any;
-  columns: string[] = ['id', 'name', 'brand', 'shape'];
+  columnsBoard: string[] = ['id', 'name', 'brand', 'shape'];
   private subscription!: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
