@@ -1,1 +1,19 @@
-<p>board works!</p>
+<mat-card>
+    <mat-card-header>
+        <h2>Planche</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table matSort [dataSource]="postData">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columns">
+                <th mat-sort-header *matHeaderCellDef>{{column}}</th>
+                <th mat-cell *matCellDef="let element">{{element[column]}}</th>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns" style="background-color: bisque;"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns "></tr>
+        </table>
+    </mat-card-content>
+    <mat-card-footer>
+        <!-- <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+        </mat-paginator> -->
+    </mat-card-footer>
+</mat-card>
