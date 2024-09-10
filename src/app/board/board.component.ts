@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, 
-         OnDestroy, inject, signal, model } from '@angular/core';
+         OnDestroy, inject, model } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
@@ -11,6 +11,9 @@ import { MaterialModule } from 'src/_module/Material.Module';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddBoardComponent } from '../modale/add-board/add-board.component';
 import { ConfirmationComponent } from '../modale/confirmation/confirmation.component';
+import { MessageBarComponent } from '../shared/message-bar/message-bar.component';
+import { MESSAGES } from '../model/messages.model';
+import { MessageBarService } from '../shared/message-bar/message-bar.service';
 
 @Component({
   selector: 'app-board',
@@ -18,7 +21,9 @@ import { ConfirmationComponent } from '../modale/confirmation/confirmation.compo
   imports: [CommonModule, 
             MaterialModule, 
             MatDialogModule,
-            AddBoardComponent],
+            AddBoardComponent,
+            MessageBarComponent
+           ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,7 +42,9 @@ export class BoardComponent implements OnInit, OnDestroy{
   readonly brand = model('');
   readonly shape = model('');
 
-  constructor(private boardService: BoardService) {
+  constructor(private boardService: BoardService,
+              private messageBarService: MessageBarService
+             ) {
   }
 
   addBoardModale() {
@@ -55,7 +62,12 @@ export class BoardComponent implements OnInit, OnDestroy{
       if (result !== undefined) {
           this.boardService.addNewBoard(formattedData).subscribe(
             response => {
-              console.log(response);
+              this.messageBarService.setMessage(MESSAGES.SUCCES.MESSAGE_SUCCES_PLANCHE);
+              this.messageBarService.toggleMessageBarSuccess();
+            },
+            error => {
+              this.messageBarService.setMessage(MESSAGES.ERREUR.MESSAGE_ERREUR);
+              this.messageBarService.toggleMessageBarError();
             }
           );
       }

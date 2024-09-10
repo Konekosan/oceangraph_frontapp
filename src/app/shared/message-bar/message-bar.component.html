@@ -1,0 +1,3 @@
+<app-message-bar-error *ngIf="messageBarService.showMessageBarError"></app-message-bar-error>
+<app-message-bar-info *ngIf="messageBarService.showMessageBarInfo"></app-message-bar-info>
+<app-message-bar-success [message]="messageBarService.message" *ngIf="messageBarService.showMessageBarSuccess"></app-message-bar-success>
