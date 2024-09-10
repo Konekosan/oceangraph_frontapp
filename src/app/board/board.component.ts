@@ -58,7 +58,7 @@ export class BoardComponent implements OnInit, OnDestroy{
             response => {
               console.log(response);
             }
-          )
+          );
       }
     });
   }
@@ -82,15 +82,24 @@ export class BoardComponent implements OnInit, OnDestroy{
     }
   }
 
-  editBoard(event: any){
-    console.log(event);
-  }
-
   deleteBoard(event: any) {
+    const boardId = event.id;
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       data: 'delete'
       });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.boardService.deleteBoardById(boardId).subscribe(
+          response => {
+            console.log(response);
+          }
+        );        
+      }
+    });
+  }
+
+  editBoard(event: any){
     console.log(event);
   }
 }

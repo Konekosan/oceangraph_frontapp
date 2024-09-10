@@ -15,7 +15,6 @@ export class ConfirmationComponent {
   readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
 
   onYesClick(): void {
-    console.log(this.data);
     this.dialogRef.close();
   }
 
