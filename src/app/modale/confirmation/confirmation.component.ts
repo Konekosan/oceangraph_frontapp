@@ -13,8 +13,15 @@ export class ConfirmationComponent {
 
   readonly data = inject(MAT_DIALOG_DATA);
   readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
+  message: string = '';
 
-  onYesClick(): void {
+  constructor(){
+    if (this.data == 'delete') {
+      this.message = 'supprimer';
+    }
+  }
+
+  onNoClick(): void {
     this.dialogRef.close();
   }
 

@@ -52,7 +52,6 @@ export class BoardComponent implements OnInit, OnDestroy{
       const formattedData = {
         'parameter': result
       };
-      console.log(formattedData);
       if (result !== undefined) {
           this.boardService.addNewBoard(formattedData).subscribe(
             response => {
