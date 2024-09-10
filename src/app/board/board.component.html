@@ -7,10 +7,22 @@
         <table mat-table matSort [dataSource]="postData">
             <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsBoard">
                 <th mat-sort-header *matHeaderCellDef>{{column}}</th>
-                <th mat-cell *matCellDef="let element">{{element[column]}}</th>
+                <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="column !== 'actions'; else actionsColumn">
+                        {{element[column]}}
+                    </ng-container>
+                    <ng-template #actionsColumn>
+                        <button mat-icon-button (click)="editBoard(element)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteBoard(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-template>
+                </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnsBoard" style="background-color:darkgray ;"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsBoard "></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsBoard; "></tr>
         </table>
     </mat-card-content>
     <mat-card-footer>

@@ -7,13 +7,21 @@ import { Board } from '../model/board.model';
 })
 export class BoardService {
 
-  base_url : string = 'http://localhost:8000';
-  board_url : string = this.base_url + '/planche';
+  baseUrl : string = 'http://localhost:8000';
+  boardUrl : string = this.baseUrl + '/planche';
+  addBoardUrl : string = this.boardUrl + '/add';
+  header_node = {
+    Accept: 'application/json',
+  }
 
   constructor(private http: HttpClient) { }
 
-  fetch_all_boards() {
-    return this.http.get(this.board_url)
+  fetchAllBoards() {
+    return this.http.get(this.boardUrl)
+  }
+
+  addNewBoard(data: any){
+    return this.http.post(this.addBoardUrl, data, { headers: this.header_node })
   }
 
 }

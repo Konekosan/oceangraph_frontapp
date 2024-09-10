@@ -1,3 +1,27 @@
 .add-modale-button {
     right: 0;
 }
+
+table.mat-table {
+    border-collapse: collapse;
+}
+
+mat-header-cell, mat-cell {
+    border: none;
+    padding: 8px; /* Ajustez l'espace entre les cellules si nécessaire */
+}
+
+/* Masquer les bordures entre les lignes */
+.mat-row, .mat-header-row {
+    border-bottom: 1px solid transparent; /* Masquer les bordures entre les lignes */
+}
+
+/* Si vous avez des bordures spécifiques ou des marges à corriger */
+.mat-cell, .mat-header-cell {
+    margin: 0;
+    padding: 8px;
+}
+
+.mat-icon-button {
+    margin: 0 4px;
+}

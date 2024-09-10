@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, 
+         OnDestroy, inject, signal, model } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
@@ -7,8 +8,9 @@ import { Subscription } from 'rxjs';
 
 import { BoardService } from './board.service';
 import { MaterialModule } from 'src/_module/Material.Module';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddBoardComponent } from '../modale/add-board/add-board.component';
+import { ConfirmationComponent } from '../modale/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-board',
@@ -18,26 +20,46 @@ import { AddBoardComponent } from '../modale/add-board/add-board.component';
             MatDialogModule,
             AddBoardComponent],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.css'
+  styleUrl: './board.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class BoardComponent implements OnInit, OnDestroy{
 
-  postData: any;
-  columnsBoard: string[] = ['id', 'name', 'brand', 'shape'];
-  private subscription!: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  postData: any;
+  columnsBoard: string[] = ['id', 'name', 'brand', 'shape', 'actions'];
+  private subscription!: Subscription;
   readonly dialog = inject(MatDialog);
+  readonly name = model('');
+  readonly brand = model('');
+  readonly shape = model('');
 
   constructor(private boardService: BoardService) {
   }
 
   addBoardModale() {
-    const dialogRef = this.dialog.open(AddBoardComponent);
+    const dialogRef = this.dialog.open(AddBoardComponent, {
+      data: { name: this.name(), 
+              brand: this.brand(),
+              shape: this.shape()
+            },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      const formattedData = {
+        'parameter': result
+      };
+      console.log(formattedData);
+      if (result !== undefined) {
+          this.boardService.addNewBoard(formattedData).subscribe(
+            response => {
+              console.log(response);
+            }
+          )
+      }
     });
   }
 
@@ -46,7 +68,7 @@ export class BoardComponent implements OnInit, OnDestroy{
   }
 
   loadBoards() {
-    this.subscription = this.boardService.fetch_all_boards().subscribe((data: any) => {
+    this.subscription = this.boardService.fetchAllBoards().subscribe((data: any) => {
       this.postData = data[0];
       this.postData = new MatTableDataSource(data[0]);
       this.postData.paginator = this.paginator;
@@ -60,8 +82,15 @@ export class BoardComponent implements OnInit, OnDestroy{
     }
   }
 
-  addModale() {
-
+  editBoard(event: any){
+    console.log(event);
   }
 
+  deleteBoard(event: any) {
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      data: 'delete'
+      });
+
+    console.log(event);
+  }
 }
