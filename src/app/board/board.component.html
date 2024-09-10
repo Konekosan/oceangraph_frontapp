@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-header>
         <h2>Planche</h2>
+        <button mat-button (click)="addBoardModale()" class="add-modale-button">Ajouter</button>
     </mat-card-header>
     <mat-card-content>
         <table mat-table matSort [dataSource]="postData">
