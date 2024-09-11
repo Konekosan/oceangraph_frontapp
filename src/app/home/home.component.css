@@ -51,6 +51,8 @@ body {
 .image-container {
   margin: 20px;
   flex: 1 1 45%;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .image {
@@ -58,6 +60,11 @@ body {
   height: 500px;
   object-fit: cover;
   border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.02); /* Zoom à 110% au survol */
 }
 
 .caption {
