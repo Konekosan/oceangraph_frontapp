@@ -48,6 +48,7 @@ export class BoardComponent implements OnInit, OnDestroy{
   }
 
   addBoardModale() {
+
     const dialogRef = this.dialog.open(AddBoardComponent, {
       data: { name: this.name(), 
               brand: this.brand(),

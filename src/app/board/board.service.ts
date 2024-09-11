@@ -21,7 +21,7 @@ export class BoardService {
   }
 
   addNewBoard(data: any){
-    return this.http.post(this.addBoardUrl, data, { headers: this.header_node })
+    return this.http.post(this.addBoardUrl, data, { headers: this.header_node });
   }
 
   deleteBoardById(id_board: string) {
