@@ -1,1 +1,14 @@
-<p>contact works!</p>
+<div class="container">
+    <h1>Nous contacter</h1>
+    <p>Si tu es intéressé pour une personnalisation ou pour des renseignements:</p>
+    <form (submit)="$event.preventDefault()">
+        <mat-form-field>
+          <mat-label>Message</mat-label>
+          <input matInput (cdkAutofill)="firstNameAutofilled = $event.isAutofilled">
+          @if (firstNameAutofilled) {
+            <mat-hint>Autofilled!</mat-hint>
+          }
+        </mat-form-field>
+        <button mat-raised-button (click)="test($event)">Submit</button>
+    </form>
+</div>
