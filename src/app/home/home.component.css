@@ -48,7 +48,15 @@ body {
   text-align: center;
 }
 
-.image-container {
+.image1-container {
+  margin: 20px;
+  flex: 1 1 45%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image2-container {
+  text-align: center;
   margin: 20px;
   flex: 1 1 45%;
   overflow: hidden;

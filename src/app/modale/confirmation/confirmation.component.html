@@ -3,7 +3,7 @@
   Etes vous sur de vouloir {{ message }}?
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onNoClick()">No</button>
   <button mat-button mat-dialog-close cdkFocusInitial
-          [mat-dialog-close]="{action: 'delete'}">Ok</button>
+          [mat-dialog-close]="{action: 'delete'}">Oui</button>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Non</button>
 </mat-dialog-actions>
