@@ -3,13 +3,16 @@
     <button mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
-    <button routerLink="" mat-button>Home</button>
-    <button mat-button>Galerie</button>
-    <button routerLink="boards" mat-button>Planche</button>
-    <button routerLink="users" mat-button>Utilisateurs</button>
+    <button class="title-menu" routerLink="" mat-button>OceanGraph</button>
+    <button class="title-menu" routerLink="gallery" mat-button>GALERIE</button>
     <span class="fill-remaining-space"></span>
-    <button routerLink="contact" mat-button>Nous contacter</button>
-    <button mat-button>Administrateur</button>
-    <button mat-button routerLink="login">Login</button>
-    <button mat-button>Logout</button>
+    <button routerLink="contact" class="title-menu" mat-button>Nous contacter</button>
+    <button class="title-menu" mat-button [matMenuTriggerFor]="menu">Administrateur</button>
+    <mat-menu #menu="matMenu">
+        <button routerLink="boards" mat-menu-item>Planche</button>
+        <button routerLink="users" mat-menu-item>Utilisateurs</button>
+        <button mat-menu-item>Tableaux</button>
+    </mat-menu>
+    <button mat-button class="title-menu" routerLink="login">Connexion / Inscription</button>
+    <button *ngIf="1==2" mat-button>Logout</button>
 </mat-toolbar>

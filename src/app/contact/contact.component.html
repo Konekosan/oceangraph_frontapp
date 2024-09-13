@@ -2,12 +2,9 @@
     <h1>Nous contacter</h1>
     <p>Si tu es intéressé pour une personnalisation ou pour des renseignements:</p>
     <form (submit)="$event.preventDefault()">
-        <mat-form-field>
+        <mat-form-field class="example-full-width">
           <mat-label>Message</mat-label>
-          <input matInput (cdkAutofill)="firstNameAutofilled = $event.isAutofilled">
-          @if (firstNameAutofilled) {
-            <mat-hint>Autofilled!</mat-hint>
-          }
+          <textarea matInput placeholder="Je voudrais des renseignements..."></textarea>
         </mat-form-field>
         <button mat-raised-button (click)="test($event)">Submit</button>
     </form>

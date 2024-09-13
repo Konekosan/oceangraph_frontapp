@@ -1,3 +1,9 @@
 .fill-remaining-space {
     flex: 1 1 auto;
   }
+
+.title-menu {
+  font-size: 25px; /* Augmente la taille du texte */
+  font-family: "Bebas Neue", sans-serif;
+  font-style: normal;
+}
